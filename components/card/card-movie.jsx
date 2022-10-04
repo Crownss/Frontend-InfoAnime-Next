@@ -9,7 +9,7 @@ export default function CardMovie(props) {
                     <div className="max-w-md mx-auto hover:shadow-xl overflow-hidden md:max-w-7xl rounded-3xl bg-black">
                         <div className="md:flex">
                             <div className="md:flex-shrink-0">
-                            <a href={result.url} rel="noreferrer" target="_blank"><img className="w-full h-full rounded-2xl" src={result.images.jpg.image_url} alt={result.title} /></a>
+                            <a href={result.url} rel="noreferrer" target="_blank"><img className="w-full h-full rounded-2xl" src={result.images.webp.image_url} alt={result.title} /></a>
                             </div>
                             <div className="p-8">
                                 <div className="tracking-wide text-sm text-indigo-500 font-semibold capitalize">released on: {moment(result.aired.from).format("ddd, DD-M-YYYY")}</div>
