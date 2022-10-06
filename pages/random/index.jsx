@@ -5,7 +5,6 @@ export async function getStaticProps() {
     const res = await fetch(process.env.NEXT_PUBLIC_ENV_RANDOM);
     const result = await res.json();
     const data = result.data
-    // console.log(data)
     if (!result) {
       return {
         redirect: {
