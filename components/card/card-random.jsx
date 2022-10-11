@@ -15,7 +15,7 @@ export default function CardRandom(props){
                                 <a href={props.data.url} rel="noreferrer" target="_blank" className="block mt-2 text-xl leading-tight font-medium font-semibold transition duration-500 ease-in-out text-cyan-600 capitalize">{props.data.title} ({props.data.title_japanese ? props.data.title_japanese :"there's no japanese title"})</a>
                                 <p className="mt-1 text-gray-500 indent-5">{props.data.synopsis ? props.data.synopsis:"not have synopsis yet"}<div className="mt-8"></div><div className="mt-1"></div>Episode: {props.data.episodes ? props.data.episodes:"null"}<div className="mt-1"></div>Type: {props.data.type ? props.data.type:"null"}<div className="mt-1"></div>Rating: {props.data.rating ? props.data.rating:"null"}
                                 <div className="mt-1"></div>Genre&apos;s:<br/>{props.data.genres ? props.data.genres.map(genre => (<li key={genre.mal_id}>{genre.name}</li>)):"null"}
-                                Trailer: {props.data.trailer.youtube_id ?<iframe className="w-full" src={"https://youtube.com/embed/"+props.data.trailer.youtube_id+"?enablejsapi=1&wmode=opaque&autoplay=0"} width="600" height="300"></iframe>:"null"}</p>
+                                Trailer: {props.data.trailer.url ? <a href={props.data.trailer.url} className="font-bold text-cyan-500">Click Me</a>:"There's not trailer about "+props.data.title}</p>
                             </div>
                         </div>
                     </div>

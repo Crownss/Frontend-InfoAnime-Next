@@ -1,6 +1,6 @@
 import os, sys, asyncio
 
-async def main() -> os.system:
+async def main(domain) -> os.system:
     os.system('rm -rf out/ .next')
 
     print("1.master\n2.github pages\n3.both")
@@ -19,6 +19,8 @@ async def main() -> os.system:
             push2 = os.system('git add -f out && git commit -n -m \"'+input2+'\"&& git subtree push --prefix out web gh-pages')
             return build, push2
         build = os.system('yarn master')
+        with open("out/CNAME", "w") as f:
+            await f.write(domain)
         push2 = os.system('git add -f out && git commit -n -m \"'+input2+'\"&& git subtree push --prefix out web gh-pages')
         return build, push2
     elif choice == 3:
@@ -30,10 +32,14 @@ async def main() -> os.system:
             input2 = "Deployed 🚀"
             push3 = os.system('git add . && git commit -m \"'+input1+'\" && git push origin master')
             build = os.system('yarn master')
+            with open("out/CNAME", "w") as f:
+                await f.write(domain)
             push4 = os.system('git add -f out && git commit -n -m \"'+input2+'\"&& git subtree push --prefix out web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"'+input1+'\" && git push origin master')
         build = os.system('yarn  master')
+        with open("out/CNAME", "w") as f:
+            await f.write(domain)
         push4 = os.system('git add -f out && git commit -n -m \"'+input2+'\"&& git subtree push --prefix out web gh-pages')
         return push3,build, push4
     else:
@@ -43,4 +49,4 @@ async def main() -> os.system:
 if __name__ == '__main__':
     os.system('clear')
     print("REMEMBER\n you are not required to fill commits for github pages")
-    asyncio.run(main())
+    asyncio.run(main("dbanime.me"))
