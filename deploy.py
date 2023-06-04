@@ -1,6 +1,6 @@
 import os, sys, asyncio, string, random
 
-async def main(domain) -> os.system:
+async def main(domain):
     letters = string.digits
     randomNum = ''.join(random.choice(letters) for i in range(5))
     os.system('rm -rf .next out')
@@ -21,7 +21,7 @@ async def main(domain) -> os.system:
             push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
             return build, push2
         build = os.system('yarn deploy')
-        with open("build/CNAME", "w") as f:
+        with open("out/CNAME", "w") as f:
             f.write(domain)
         push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
         return build, push2
@@ -34,13 +34,13 @@ async def main(domain) -> os.system:
             input2 = "Deployed 🚀"
             push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
             build = os.system('yarn deploy')
-            with open("build/CNAME", "w") as f:
+            with open("out/CNAME", "w") as f:
                 f.write(domain)
             push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
         build = os.system('yarn master')
-        with open("build/CNAME", "w") as f:
+        with open("out/CNAME", "w") as f:
             f.write(domain)
         push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
         return push3,build, push4
@@ -51,4 +51,4 @@ async def main(domain) -> os.system:
 if __name__ == '__main__':
     os.system('clear')
     print("REMEMBER\n you are not required to fill commits for github pages")
-    asyncio.run(main("dbanime.me"))
+    asyncio.run(main(os.getenv("domain")))
