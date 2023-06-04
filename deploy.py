@@ -19,12 +19,12 @@ async def main(domain):
         if len(input2) == 0:
             input2 = "Deployed 🚀"
             build = os.system('yarn deploy')
-            push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
+            push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return build, push2
         build = os.system('yarn deploy')
         with open("out/CNAME", "w") as f:
             f.write(domain)
-        push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
+        push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return build, push2
     elif choice == 3:
         input1 = input("commit for master: ")
@@ -37,13 +37,13 @@ async def main(domain):
             build = os.system('yarn deploy')
             with open("out/CNAME", "w") as f:
                 f.write(domain)
-            push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
+            push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
         build = os.system('yarn master')
         with open("out/CNAME", "w") as f:
             f.write(domain)
-        push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
+        push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return push3,build, push4
     else:
         print("you not choose anything so i'll exit")
