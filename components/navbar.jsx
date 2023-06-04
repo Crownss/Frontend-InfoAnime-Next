@@ -1,95 +1,156 @@
-import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faFilm, faTheaterMasks, faInfoCircle, faShuffle, faSearch} from '@fortawesome/free-solid-svg-icons'
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
+import React, { useCallback, useRef, useState } from "react";
+import axios from "axios";
 
 export default function Navbar() {
-    return (
-        <div>
-            <nav className="flex container justify-between flex-nowrap p-6">
-                <div className="order-first">
-                    <span className="font-bold text-center text-xl tracking-tight">DBAnime</span>
-                </div>
-                {/* <div className="order-last">
-                    <input type="text" className="rounded" placeholder="Search..." />
-                </div> */}
-                <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                </div>
-            </nav>
-            <div className="min-w-screen min-h-screen fixed items-center justify-center px-5 pt-7 pb-24">
-                <div className="w-full max-w-md mx-auto fixed bottom-0 right-0 left-0">
-                    <div className="bg-black rounded-2xl">
-                        <div className="flex">
-                            <div className="flex-1 group">
-                                <Link href="/movie">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                            <FontAwesomeIcon icon={faFilm} />
-                                            <span className="block text-xs pb-2 capitalize">Movie</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div>
-                            <div className="flex-1 group">
-                                <Link href="/random">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                            <FontAwesomeIcon icon={faShuffle} />
-                                            <span className="block text-xs pb-2 capitalize">Random</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div>
-                            <div className="flex-1 group">
-                                <Link href="/">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                        <FontAwesomeIcon icon={faHome} />
-                                            <span className="block text-xs pb-2 capitalize">Home</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div>
-                            {/* <div className="flex-1 group">
-                                <Link href="/login">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                            <FontAwesomeIcon icon={faUserLock} />
-                                            <span className="block text-xs pb-2">Season</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div> */}
-                            <div className="flex-1 group">
-                                <Link href="/about">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                            <FontAwesomeIcon icon={faInfoCircle} />
-                                            <span className="block text-xs pb-2 capitalize">About</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div>
-                            <div className="flex-1 group">
-                                <Link href="/search">
-                                    <a className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                                        <span className="block px-1 pt-1 pb-1">
-                                            <FontAwesomeIcon icon={faSearch} />
-                                            <span className="block text-xs pb-2 capitalize">search</span>
-                                            <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                                        </span>
-                                    </a>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+  const searchRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(false);
+  const [result, setResult] = useState([]);
+  const searchEndPoint = process.env.NEXT_PUBLIC_API_SEARCH;
+  let timeout;
+  function debounce(ms) {
+    clearTimeout(timeout);
+    let promise = new Promise(function (resolve) {
+      timeout = setTimeout(function () {
+        resolve(null);
+      }, ms);
+    });
+    return promise;
+  }
+  const onChange = useCallback(
+    async (event) => {
+      setQuery(event.target.value);
+      if (event.target.value !== "") {
+        await debounce(500);
+        axios
+          .get(searchEndPoint + event.target.value)
+          .then((res) => setResult(res.data.data))
+          .catch((err) => console.log(err.message));
+      } else {
+        setResult([]);
+      }
+    },
+    [searchEndPoint]
+  );
+  const onClick = useCallback((event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setActive(false);
+      window.removeEventListener("click", onClick);
+    }
+  }, []);
+  const onFocus = useCallback(() => {
+    setActive(true);
+    window.removeEventListener("click", onClick);
+  }, [onClick]);
+  const getCurrentPath = useRouter();
+  const [isOpen, setOpen] = useState(false);
 
+  return (
+    <>
+      <div className="navbar bg-indigo-900 items-start">
+        <div className="flex-1">
+          <div className="mt-10"></div>
+          <Link
+            href={"/"}
+            className="normal-case text-2xl font-bold text-indigo-100"
+          >
+            dbanime
+          </Link>
+        </div>
+        <div className="flex-none gap-2">
+          <div className="form-control">
+            <input
+              type="text"
+              placeholder="Search...."
+              className="input input-md input-bordered w-full max-w-xs"
+              onChange={onChange}
+              onFocus={onFocus}
+              value={query}
+            />
+            <div className="">
+              {active && result && query
+                ? query.length > 0 && (
+                    <ul className="absolute z-50 border border-cyan-400 bg-base-100 rounded rounded-xl">
+                      {result.map(({ mal_id, title, url }) => (
+                        <li key={mal_id}>
+                          <Link href={url}>
+                            <p className="font-semibold transition duration-500 ease-in-out hover:text-blue-500">
+                              {title}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                : null}
+            </div>
+          </div>
+          <div
+            className="dropdown dropdown-end"
+            onClick={() => {
+              if (!isOpen) {
+                return setOpen(true);
+              }
+              return setOpen(false);
+            }}
+          >
+            <label tabIndex={0} className="btn btn-rounded btn-outline">
+              <div className="">
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+            </label>
+            {isOpen ? (
+              <>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link
+                      href={"/"}
+                      className={
+                        getCurrentPath.pathname === "/"
+                          ? "justify-between border-solid border-2 border-sky-700"
+                          : "justify-between hover:border-solid hover:border-2 hover:border-sky-500"
+                      }
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={"/movie"}
+                      className={
+                        getCurrentPath.pathname === "/movie"
+                          ? "justify-between border-solid border-2 border-sky-700"
+                          : "justify-between hover:border-solid hover:border-2 hover:border-sky-500"
+                      }
+                    >
+                      Movie
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={"/about"}
+                      className={
+                        getCurrentPath.pathname === "/about"
+                          ? "justify-between border-solid border-2 border-sky-700"
+                          : "justify-between hover:border-solid hover:border-2 hover:border-sky-500"
+                      }
+                    >
+                      About
+                    </Link>
+                  </li>
+                </ul>
+              </>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

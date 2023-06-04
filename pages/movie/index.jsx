@@ -1,30 +1,31 @@
-import Layout from '../../components/layout'
-import CardMovie from '../../components/card/card-movie'
-
+import Layout from "../../components/layout";
+import CardHome from "../../components/card/card-home";
+import axios from "axios";
 
 export async function getStaticProps() {
-    const res = await fetch(process.env.NEXT_PUBLIC_ENV_MOVIE);
-    const data = await res.json();
-    if (!data) {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
-    let _ = require('lodash')
-    const sortby = _.sortBy(data.data, ['title'])
+  let data
+  await axios.get(process.env.NEXT_PUBLIC_API_MOVIE)
+  .then((result)=>{data = result.data})
+  .catch((err)=>{data = err.message});
+  if (!data) {
     return {
-        props: {sortby}
-    }
+      redirect: {
+        destination: "/500",
+        statusCode: 500,
+      },
+    };
+  }
+  return {
+    props: { data },
+    revalidate: 10,
+  };
 }
 
-export default function Movie({sortby}) {
+export default function Movie({ data }) {
   return (
     <>
-      <Layout title="Movie" name="DBAnime"></Layout>
-      <CardMovie data={sortby}></CardMovie>
+      <Layout title="Movie" name="dbanime" />
+      <CardHome data={data.data} />
     </>
-  )
+  );
 }

@@ -1,30 +1,31 @@
-import Layout from '../components/layout'
-import CardHome from '../components/card/card-home'
-
+import axios from "axios";
+import CardHome from "../components/card/card-home";
+import Layout from '../components/layout';
 
 export async function getStaticProps() {
-    const res = await fetch(process.env.NEXT_PUBLIC_ENV_HOME);
-    const data = await res.json();
-    if (!data) {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
-    let _ = require('lodash')
-    const sortby = _.sortBy(data.data, ['title'])
+  let data
+  await axios.get(process.env.NEXT_PUBLIC_API_HOME)
+  .then((result)=>{data = result.data})
+  .catch((err)=>{data = err.message});
+  if (!data) {
     return {
-        props: {sortby}
-    }
+      redirect: {
+        destination: "/500",
+        statusCode: 500,
+      },
+    };
+  }
+  return {
+    props: { data },
+    revalidate: 10,
+  };
 }
 
-export default function Home({sortby}) {
+export default function Home({ data }) {
   return (
     <div>
-      <Layout title="Home" name="DBAnime"></Layout>
-      <CardHome data={sortby}></CardHome>
+      <Layout title="Home" name="dbanime" />
+      <CardHome data={data.data} />
     </div>
-  )
+  );
 }

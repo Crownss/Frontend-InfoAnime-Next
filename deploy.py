@@ -3,7 +3,7 @@ import os, sys, asyncio, string, random
 async def main(domain) -> os.system:
     letters = string.digits
     randomNum = ''.join(random.choice(letters) for i in range(5))
-    os.system('rm -rf out/ .next')
+    os.system('rm -rf .next out')
 
     print("1.master\n2.github pages\n3.both")
     choice =  int(input("choose you action: "))
@@ -17,13 +17,13 @@ async def main(domain) -> os.system:
         input2 = input("commit for github pages(optional): ")
         if len(input2) == 0:
             input2 = "Deployed 🚀"
-            build = os.system('yarn master')
-            push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
+            build = os.system('yarn deploy')
+            push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
             return build, push2
-        build = os.system('yarn master')
-        with open("out/CNAME", "w") as f:
+        build = os.system('yarn deploy')
+        with open("build/CNAME", "w") as f:
             f.write(domain)
-        push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
+        push2 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
         return build, push2
     elif choice == 3:
         input1 = input("commit for master: ")
@@ -33,16 +33,16 @@ async def main(domain) -> os.system:
         if len(input2) == 0:
             input2 = "Deployed 🚀"
             push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
-            build = os.system('yarn master')
-            with open("out/CNAME", "w") as f:
+            build = os.system('yarn deploy')
+            with open("build/CNAME", "w") as f:
                 f.write(domain)
-            push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
+            push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
-        build = os.system('yarn  master')
-        with open("out/CNAME", "w") as f:
+        build = os.system('yarn master')
+        with open("build/CNAME", "w") as f:
             f.write(domain)
-        push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
+        push4 = os.system('git add -f build && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix build web gh-pages')
         return push3,build, push4
     else:
         print("you not choose anything so i'll exit")
