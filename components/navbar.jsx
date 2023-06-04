@@ -4,13 +4,14 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import React, { useCallback, useRef, useState } from "react";
 import axios from "axios";
+import ENV from "../environment/const";
 
 export default function Navbar() {
   const searchRef = useRef(null);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(false);
   const [result, setResult] = useState([]);
-  const searchEndPoint = process.env.NEXT_PUBLIC_API_SEARCH;
+  const searchEndPoint = ENV.Search;
   let timeout;
   function debounce(ms) {
     clearTimeout(timeout);
