@@ -1,4 +1,5 @@
 import os, sys, asyncio, string, random
+from py_dotenv import read_dotenv
 
 async def main(domain):
     letters = string.digits
@@ -49,6 +50,8 @@ async def main(domain):
         sys.exit()
 
 if __name__ == '__main__':
+    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+    read_dotenv(dotenv_path)
     os.system('clear')
     print("REMEMBER\n you are not required to fill commits for github pages")
     asyncio.run(main(os.getenv("domain")))
