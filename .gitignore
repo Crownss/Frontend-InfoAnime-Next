@@ -12,6 +12,7 @@ pnpm-lock.yaml
 .DS_STORE
 .DS_STORE*
 .eslintrc.json
+environment
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
