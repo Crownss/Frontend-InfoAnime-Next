@@ -21,7 +21,7 @@ async def main(domain):
             push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return build, push2
         build = os.system('yarn deploy')
-        with open("out/CNAME", "wb") as f:
+        with open("out/CNAME", "w") as f:
             f.write(domain)
         push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return build, push2
@@ -34,13 +34,13 @@ async def main(domain):
             input2 = "Deployed 🚀"
             push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
             build = os.system('yarn deploy')
-            with open("out/CNAME", "wb") as f:
+            with open("out/CNAME", "w") as f:
                 f.write(domain)
             push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
         build = os.system('yarn master')
-        with open("out/CNAME", "wb") as f:
+        with open("out/CNAME", "w") as f:
             f.write(domain)
         push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return push3,build, push4
