@@ -1,4 +1,4 @@
-import os, sys, asyncio, string, random
+import os, sys, asyncio, string, random, time
 
 async def main(domain):
     letters = string.digits
@@ -23,6 +23,7 @@ async def main(domain):
         build = os.system('yarn deploy')
         with open("out/CNAME", "w") as f:
             f.write(domain)
+            await asyncio.sleep(0.5)
         push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return build, push2
     elif choice == 3:
@@ -36,12 +37,14 @@ async def main(domain):
             build = os.system('yarn deploy')
             with open("out/CNAME", "w") as f:
                 f.write(domain)
+                await asyncio.sleep(0.5)
             push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return push3, build, push4
         push3 = os.system('git add . && git commit -m \"#'+randomNum+' '+input1+'\" && git push origin master')
         build = os.system('yarn master')
         with open("out/CNAME", "w") as f:
             f.write(domain)
+            await asyncio.sleep(0.5)
         push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum+' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return push3,build, push4
     else:
