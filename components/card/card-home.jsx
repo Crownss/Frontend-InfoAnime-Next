@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function CardHome(props) {
-  const router = useRouter();
+  const [isOpen, setOpen] = useState(false);
   return (
     <>
       {props.data
@@ -10,30 +10,58 @@ export default function CardHome(props) {
             <div key={result.mal_id}>
               <div className="mt-10"></div>
               <div className="container mx-auto flex flex-wrap justify-around">
-                <div className="card w-96 bg-base-100 shadow-xl image-full">
-                  <figure className="blur-sm">
+                <div className="card w-96 bg-base-100 shadow-xl image-full rounded-xl">
+                  <figure className="">
                     <Image
                       src={result.images.webp.large_image_url}
                       alt={result.title}
                       fill={true}
+                      className="rounded-2xl"
                     />
                   </figure>
                   <div className="card-body">
-                    <h2 className="card-title font-bold text-center">
+                    <button
+                      className="card-title font-bold text-center tooltip"
+                      data-tip="more information..."
+                      onClick={() => {
+                        if (!isOpen) {
+                          return setOpen(true);
+                        }
+                        return setOpen(false);
+                      }}
+                    >
                       {result.title}
-                    </h2>
+                    </button>
                     <p className="text-ellipsis overflow-hidden text-left indent-5">
                       {result.synopsis}
                     </p>
-                    {/* <div className="card-actions justify-end">
-                      <button className="btn btn-primary">Buy Now</button>
-                    </div> */}
                   </div>
                 </div>
               </div>
             </div>
           ))
-        : ""}
+        : null}
+      {isOpen ? (
+        <dialog className="modal modal-bottom sm:modal-middle">
+          <form method="dialog" className="modal-box">
+            <h3 className="font-bold text-lg">Hello!</h3>
+            <p className="py-4">
+              Press ESC key or click the button below to close
+            </p>
+            <div className="modal-action">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </div>
+          </form>
+          {/* <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form> */}
+        </dialog>
+      ) : (
+        () => {
+          return setOpen(false);
+        }
+      )}
       <br />
       <br />
     </>

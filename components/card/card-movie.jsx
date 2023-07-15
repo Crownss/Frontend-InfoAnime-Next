@@ -9,10 +9,11 @@ export default function CardMovie(props) {
             <div key={result.mal_id}>
               <div className="container mx-auto flex flex-wrap justify-around">
                 <div className="card w-96 bg-base-100 shadow-xl image-full">
-                  <figure className="blur-sm">
+                  <figure className="">
                     <img
                       src={result.images.webp.large_image_url}
                       alt={result.title}
+                      className="rounded-2xl"
                     />
                   </figure>
                   <div className="card-body">

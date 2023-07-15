@@ -5,20 +5,47 @@ import ENV from "../../environment/const";
 
 export default function Movie() {
   const [result, setResullt] = useState([]);
+  const [currentPage, setCurrent] = useState(1);
+  const [hasNext, setNext] = useState(false);
+  const pageSize = 25;
   useEffect(() => {
-    fetchfunc();
+    fetchfunc(10, 1);
   }, []);
 
-  const fetchfunc = async () => {
-    const response = await fetch(ENV.Movie, {
+  const fetchfunc = async (size, page) => {
+    const response = await fetch(ENV.Movie + `&limit=${size}&page=${page}`, {
       method: "GET",
     });
-    let data = await response.json();
+    const data = await response.json();
+    setCurrent(data.pagination.current_page);
+    setNext(data.pagination.has_next_page);
     setResullt(data);
+  };
+  const nextFunc = () => {
+    fetchfunc(pageSize, currentPage + 1);
+  };
+  const prevFunc = () => {
+    fetchfunc(pageSize, currentPage - 1);
   };
   return (
     <>
       <Layout title="Movie" name="dbanime" />
+      <div className="join grid grid-cols-2 xl:float-right">
+        <button
+          className="join-item btn btn-ghost"
+          disabled={currentPage === 1 ? "disable" : ""}
+          onClick={prevFunc}
+        >
+          Previous
+        </button>
+        <button
+          className="join-item btn btn-ghost"
+          disabled={hasNext ? "" : "disable"}
+          onClick={nextFunc}
+        >
+          Next
+        </button>
+      </div>
       <CardHome data={result.data} />
     </>
   );

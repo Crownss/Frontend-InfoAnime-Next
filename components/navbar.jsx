@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -26,7 +27,7 @@ export default function Navbar() {
     async (event) => {
       setQuery(event.target.value);
       if (event.target.value !== "") {
-        await debounce(500);
+        await debounce(700);
         axios
           .get(searchEndPoint + event.target.value)
           .then((res) => setResult(res.data.data))
@@ -52,22 +53,22 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-indigo-900 items-start">
+      <div className="navbar bg-gray-700 items-start">
         <div className="flex-1">
           <div className="mt-10"></div>
           <Link
             href={"/"}
             className="normal-case text-2xl font-bold text-indigo-100"
           >
-            dbanime
+            <Image alt="logo" src={"/alice.png"} width={50} height={10} />
           </Link>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
             <input
               type="text"
-              placeholder="Search...."
-              className="input input-md input-bordered w-full max-w-xs"
+              placeholder="Search ...."
+              className="input input-ghost w-full max-w-xs rounded-xl"
               onChange={onChange}
               onFocus={onFocus}
               value={query}
@@ -75,7 +76,7 @@ export default function Navbar() {
             <div className="">
               {active && result && query
                 ? query.length > 0 && (
-                    <ul className="absolute z-50 border border-cyan-400 bg-base-100 rounded rounded-xl">
+                    <ul className="absolute z-50 border border-cyan-400 bg-base-100 rounded-xl">
                       {result.map(({ mal_id, title, url }) => (
                         <li key={mal_id}>
                           <Link href={url}>
@@ -91,7 +92,7 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className="dropdown dropdown-end"
+            className="dropdown dropdown-end rounded-lg"
             onClick={() => {
               if (!isOpen) {
                 return setOpen(true);
@@ -99,7 +100,10 @@ export default function Navbar() {
               return setOpen(false);
             }}
           >
-            <label tabIndex={0} className="btn btn-rounded btn-outline">
+            <label
+              tabIndex={0}
+              className="btn btn-rounded btn-outline rounded-lg"
+            >
               <div className="">
                 <FontAwesomeIcon icon={faBars} />
               </div>
@@ -108,14 +112,14 @@ export default function Navbar() {
               <>
                 <ul
                   tabIndex={0}
-                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-lg w-52"
                 >
                   <li>
                     <Link
                       href={"/"}
                       className={
                         getCurrentPath.pathname === "/"
-                          ? "justify-between border-solid border-2 border-sky-700"
+                          ? "justify-between border-solid border-2 hover:rounded-xl border-sky-700"
                           : "justify-between hover:border-solid hover:border-2 hover:border-sky-500"
                       }
                     >
@@ -148,7 +152,11 @@ export default function Navbar() {
                   </li>
                 </ul>
               </>
-            ) : null}
+            ) : (
+              () => {
+                return setOpen(false);
+              }
+            )}
           </div>
         </div>
       </div>
