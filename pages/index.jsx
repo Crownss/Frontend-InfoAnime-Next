@@ -28,7 +28,7 @@ export default function Home() {
     fetchfunc(pageSize, currentPage - 1);
   };
   return (
-    <div>
+    <>
       <Layout title="Home" name="dbanime" />
       <div className="join grid grid-cols-2 xl:float-right">
         <button
@@ -47,6 +47,6 @@ export default function Home() {
         </button>
       </div>
       <CardHome data={result.data} />
-    </div>
+    </>
   );
 }
