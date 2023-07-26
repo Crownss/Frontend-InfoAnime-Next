@@ -9,7 +9,7 @@ export default function LoveMode() {
   const [changeSubject, setChangeSubject] = useState(false);
   return (
     <>
-      <Layout title={"for " + getName.toUpperCase() + " ❤️"} name="" />
+      <Layout title={"for " + getName + " ❤️"} name="" />
       <div className="flex flex-wrap justify-center items-center">
         <div className="">
           {changeSubject ? (
