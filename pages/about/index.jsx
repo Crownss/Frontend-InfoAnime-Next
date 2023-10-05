@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function About() {
   return (
     <>
-      <Layout title="About" name="dbanime"></Layout>
+      <Layout title="About" name="infoanime"></Layout>
       <h1 className="font-bold text-center capitalize text-xl">
         This web has build with{" "}
         <Link

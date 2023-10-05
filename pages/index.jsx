@@ -29,7 +29,7 @@ export default function Home() {
   };
   return (
     <>
-      <Layout title="Home" name="dbanime" />
+      <Layout title="Home" name="infoanime" />
       <div className="join grid grid-cols-2 xl:float-right">
         <button
           className="join-item btn btn-ghost"

@@ -18,11 +18,11 @@ export default function Layout(props) {
         <meta name="title" content={props.name} />
         <meta
           name="description"
-          content="DBAnime atau kepanjangan nya adalah Database Anime, website ini hanya bertujuan untuk menyimpan beberapa anime untuk keperluan pribadi"
+          content="InfoAnime adalah informasi seputar anime series tv yg akan rilis dan movie, berdasarkan informasi bersumber dari MyAnimeList"
         />
         <meta
           name="keywords"
-          content="dbanime, DBA, databaseanime, anime database, database anime. animedatabase, dba"
+          content="infoanime, animeinfo, anime, info, ianime, animes"
         />
         <meta name="robots" content="index, follow" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,7 +40,7 @@ export default function Layout(props) {
         <meta
           name="og:description"
           property="og:description"
-          content="DBAnime atau kepanjangan nya adalah Database Anime, website ini hanya bertujuan untuk menyimpan beberapa anime untuk keperluan pribadi"
+          content="InfoAnime adalah informasi seputar anime series tv yg akan rilis dan movie, berdasarkan informasi bersumber dari MyAnimeList"
         />
         <meta
           name="og:site_name"

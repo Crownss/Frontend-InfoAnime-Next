@@ -9,7 +9,7 @@ export default function InternalSystemError() {
   }
   return (
     <>
-      <Layout title="Internal System Error" name="DBAnime" />
+      <Layout title="Internal System Error" name="infoanime" />
       <h1 className="font-bold text-center">
         I don&apos;t know what is wrong but, you can go{" "}
         <button onClick={back_page} className="font-bold">
