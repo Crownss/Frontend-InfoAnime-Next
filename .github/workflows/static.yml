@@ -3,11 +3,10 @@ name: Deployed InfoAnime
 
 on:
   # Runs on pushes targeting the default branch
+  workflow_dispatch:
   push:
-    branches: ["gh-pages"]
-  on:
-  watch
-    types: [started]
+    branches:
+      - gh-pages
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
