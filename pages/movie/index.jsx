@@ -29,7 +29,7 @@ export default function Movie() {
   };
   return (
     <>
-      <Layout title="Movie" name="infoanime" />
+      <Layout title="Movie" name="InfoAnime" />
       <div className="join grid grid-cols-2 xl:float-right">
         <button
           className="join-item btn btn-ghost"
