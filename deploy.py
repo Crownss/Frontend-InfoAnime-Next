@@ -25,6 +25,9 @@ async def main(domain):
         if len(input2) == 0:
             input2 = "Deployed 🚀"
             build = os.system('yarn deploy')
+            with open("out/CNAME", "w") as f:
+                f.write(domain)
+                await asyncio.sleep(0.5)
             push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum +
                               ' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return build, push2
