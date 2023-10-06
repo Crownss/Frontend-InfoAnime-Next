@@ -47,6 +47,7 @@ build/Release
 
 # Dependency directories
 out/
+out/.DS_Store
 node_modules/
 jspm_packages/
 ubuntu/
