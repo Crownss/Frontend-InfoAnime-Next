@@ -36,7 +36,7 @@ jobs:
         mkdir environment
         echo "${{ secrets.ENV }}" > environment/const.js
         ls -lah
-        
+
     - name: Build
       run: yarn deploy
     - name: Move Back
@@ -55,14 +55,18 @@ jobs:
         ls -lah
 
     - name: Copy Build Files 
-      run: cp -r  /home/runner/work/frontend-infoanime-next/out/* .
-
+      run: |
+        pwd
+        ls ..
+        cp -r  out/* Crownss.github.io/
+        ls -lah
+        
     - name: Commit and Push Changes
       run: |
-        cd  /home/runner/work/frontend-infoanime-next/frontend-infoanime-next/Crownss.github.io/
+        cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/Crownss.github.io/
         git config --global user.name "Mandakara Sadewa"
         git config --global user.email "mdswa@zxce3.net"
         touch .nojekyll
         git add .
         git commit -m "Update GitHub Pages"
-        git push
+        git push --prune https://mdswa:${{ secrets.mdswa }}@github.com/Crownss/Crownss.github.io.git gh-pages
