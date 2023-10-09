@@ -46,7 +46,6 @@ jobs:
           ls -lah
       - name: clone the repo
         run: |
-          echo ${{secrets.MDSWA}}
           git clone --single-branch --branch gh-pages https://mdswa:${{ secrets.MDSWA }}@github.com/Crownss/Crownss.github.io.git
           ls -lah
 
@@ -64,6 +63,7 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          echo "${{secrets.MDSWA}}"
           cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/Crownss.github.io/
           git config --global user.name "Mandakara Sadewa"
           git config --global user.email "mdswa@zxce3.net"
