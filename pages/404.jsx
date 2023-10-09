@@ -5,7 +5,7 @@ export default function NotFound() {
     <>
       <Layout title="Not Found" name="InfoAnime" />
       <h1 className="font-bold text-center">
-        Whatcu lookin for? You are lost, you can click logo in left corner
+        Whatcu lookin for? You are lost, you can click logo in above
       </h1>
     </>
   );

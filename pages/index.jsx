@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import ENV from "../environment/const";
 
 export default function Home() {
-  const [result, setResullt] = useState([]);
+  const [result, setResult] = useState([]);
   const [currentPage, setCurrent] = useState(1);
   const [hasNext, setNext] = useState(false);
-  const pageSize = 10;
+  const pageSize = 9;
   useEffect(() => {
     fetchfunc(pageSize, 1);
   }, []);
@@ -19,7 +19,7 @@ export default function Home() {
     const data = await response.json();
     setCurrent(data.pagination.current_page);
     setNext(data.pagination.has_next_page);
-    setResullt(data);
+    setResult(data);
   };
   const nextFunc = () => {
     fetchfunc(pageSize, currentPage + 1);

@@ -7,9 +7,9 @@ export default function Movie() {
   const [result, setResullt] = useState([]);
   const [currentPage, setCurrent] = useState(1);
   const [hasNext, setNext] = useState(false);
-  const pageSize = 25;
+  const pageSize = 9;
   useEffect(() => {
-    fetchfunc(10, 1);
+    fetchfunc(pageSize, 1);
   }, []);
 
   const fetchfunc = async (size, page) => {
