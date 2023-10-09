@@ -3,7 +3,6 @@ import sys
 import asyncio
 import string
 import random
-import time
 
 
 async def main(domain):
@@ -28,6 +27,8 @@ async def main(domain):
             with open("out/CNAME", "w") as f:
                 f.write(domain)
                 await asyncio.sleep(0.5)
+            os.system(
+                "mkdir out/.github;mkdir out/.github/workflows;cp static.txt out/.github/workflows/static.yml")
             push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum +
                               ' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return build, push2
@@ -35,8 +36,10 @@ async def main(domain):
         with open("out/CNAME", "w") as f:
             f.write(domain)
             await asyncio.sleep(0.5)
-        push2 = os.system('git add -f out && git commit -n -m \"#'+randomNum +
-                          ' '+input2+'\"&& git subtree push --prefix out web gh-pages')
+        os.system(
+            "mkdir out/.github;mkdir out/.github/workflows;cp static.txt out/.github/workflows/static.yml")
+        push2 = os.system('git add -f out; git commit -n -m \"#'+randomNum +
+                          ' '+input2+'\";git push -d web gh-pages; git subtree push --prefix out web gh-pages')
         return build, push2
     elif choice == 3:
         input1 = input("commit for master: ")
@@ -51,6 +54,8 @@ async def main(domain):
             with open("out/CNAME", "w") as f:
                 f.write(domain)
                 await asyncio.sleep(0.5)
+            os.system(
+                "mkdir out/.github;mkdir out/.github/workflows;cp static.txt out/.github/workflows/static.yml")
             push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum +
                               ' '+input2+'\"&& git subtree push --prefix out web gh-pages')
             return push3, build, push4
@@ -60,6 +65,8 @@ async def main(domain):
         with open("out/CNAME", "w") as f:
             f.write(domain)
             await asyncio.sleep(0.5)
+        os.system(
+            "mkdir out/.github;mkdir out/.github/workflows;cp static.txt out/.github/workflows/static.yml")
         push4 = os.system('git add -f out && git commit -n -m \"#'+randomNum +
                           ' '+input2+'\"&& git subtree push --prefix out web gh-pages')
         return push3, build, push4
