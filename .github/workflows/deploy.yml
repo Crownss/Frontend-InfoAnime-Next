@@ -63,7 +63,6 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          echo "${{secrets.MDSWA}}"
           cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/Crownss.github.io/
           git config --global user.name "Mandakara Sadewa"
           git config --global user.email "mdswa@zxce3.net"
