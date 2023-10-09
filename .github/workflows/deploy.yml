@@ -46,6 +46,7 @@ jobs:
           ls -lah
       - name: clone the repo
         run: |
+          echo ${{secrets.MDSWA}}
           git clone --single-branch --branch gh-pages https://mdswa:${{ secrets.MDSWA }}@github.com/Crownss/Crownss.github.io.git
           ls -lah
 
