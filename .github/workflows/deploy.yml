@@ -63,10 +63,11 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/Crownss.github.io/
-          git config user.name "crownss"
+          cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/
+          git config user.name "Crownss"
           git config user.email "jesenkun@gmail.com"
           touch .nojekyll
           git add .
           git commit -am "Update GitHub Pages"
-          git push --prune https://crownss:${{ secrets.CROWNSS }}@github.com/Crownss/Crownss.github.io.git gh-pages
+          git push -d https://crownss:${{ secrets.CROWNSS }}@github.com/Crownss/Crownss.github.io.git gh-pages
+          git subtree push --prefix Crownss.github.io https://crownss:${{ secrets.CROWNSS }}@github.com/Crownss/Crownss.github.io.git gh-pages
