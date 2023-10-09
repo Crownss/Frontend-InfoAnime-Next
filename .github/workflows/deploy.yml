@@ -46,7 +46,7 @@ jobs:
           ls -lah
       - name: clone the repo
         run: |
-          git clone --single-branch --branch gh-pages https://mdswa:${{ secrets.MDSWA }}@github.com/Crownss/Crownss.github.io.git
+          git clone --single-branch --branch gh-pages https://crownss:${{ secrets.CROWNSS }}@github.com/Crownss/Crownss.github.io.git
           ls -lah
 
       - name: Prepare The Repo
@@ -64,9 +64,9 @@ jobs:
       - name: Commit and Push Changes
         run: |
           cd  /home/runner/work/Frontend-InfoAnime-Next/Frontend-InfoAnime-Next/Crownss.github.io/
-          git config --global user.name "Mandakara Sadewa"
-          git config --global user.email "mdswa@zxce3.net"
+          git config user.name "crownss"
+          git config user.email "jesenkun@gmail.com"
           touch .nojekyll
           git add .
-          git commit -m "Update GitHub Pages"
-          git push --prune https://mdswa:${{ secrets.MDSWA }}@github.com/Crownss/Crownss.github.io.git gh-pages
+          git commit -am "Update GitHub Pages"
+          git push --prune https://crownss:${{ secrets.CROWNSS }}@github.com/Crownss/Crownss.github.io.git gh-pages
