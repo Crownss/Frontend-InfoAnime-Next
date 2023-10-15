@@ -1,5 +1,36 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Env a.k.a Environment
+
+Use file in `environment/consts.js`
+with this key
+
+```
+const BaseURL = "";
+const PathHome = "";
+const PathMovie = "";
+const PathSearch = "";
+const PathDetail = """;
+
+export default class ENV {
+static Home = BaseURL + PathHome;
+static Movie = BaseURL + PathMovie;
+static Search = BaseURL + PathSearch;
+static Detail = BaseURL + PathDetail;
+static NODE_ENV = NODE_ENV;
+}
+```
+
+and you can use import with `import ENV from "../environment/const";`
+
+### i don't use .env btw 🤣
+
+# Deployed on github pages as static website
+
+you can see many command in `package.json` or use `depoloy.py` if you can read the python code what that script do
+
+you can check live web on: [Info Anime](https://infoanime.site)
+
 ## Getting Started
 
 First, run the development server:
