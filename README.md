@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Env a.k.a Environment
 
-Use file in `environment/consts.js`
+Use file in `environment/const.js`
 with this key
 
 ```
