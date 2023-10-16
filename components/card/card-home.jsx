@@ -11,9 +11,7 @@ export default function CardHome(props) {
     <>
       <div
         className={
-          props.data
-            ? "container mx-auto flex flex-wrap justify-around"
-            : "hidden"
+          props.data ? "container flex flex-wrap justify-around" : "hidden"
         }
       >
         {props.data ? (

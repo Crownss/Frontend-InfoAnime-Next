@@ -21,13 +21,13 @@ export default function About() {
         API
       </h1>
       <div className="mt-10"></div>
-      <div className="container mx-auto flex flex-nowrap">
+      <div className="container flex flex-nowrap">
         <div className="grow">
           <Link
             className="btn btn-outline font-bold text-center"
             target="_blank"
             rel="noreferrer"
-            href="https://instagr.am/abcdefuck_yeah"
+            href="https://instagr.am/britoniers"
           >
             wanna ask something ? <FontAwesomeIcon icon={faInstagram} />
           </Link>
